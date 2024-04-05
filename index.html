@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTEC Visit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="navbar">
+            <img src="logo.jpg" alt="">
+        </div>
+        <div class="content">
+            <h1>Welcome to DTEC Visit Page</h1><br>
+            <button type="button" class="glow-on-hover" onclick="openAnotherPage()">Take a tour</button>
+        </div>
+
+
+        <div class="bubbles">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+            <img src="images/bubble.png">
+        </div>
+
+    </div>
+
+    <script>
+        function openAnotherPage() {
+            // Specify the path to the HTML file you want to open
+            var url = "form.html"; // Path to another HTML file
+            
+            // Navigate to the specified URL
+            window.location.href = url;
+        }
+    </script>
+    
+    
+</body>
+</html>

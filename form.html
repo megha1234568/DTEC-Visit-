@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DTEC Visit Form</title>
+    <link rel="stylesheet" href="form.css">
+    
+</head>
+<body>
+  
+  <div class="hero">
+    
+    <h2>DTEC Visit Form</h2><img onclick="openAnotherPage()" src="home.png" alt="">
+    <form id="pdfForm">
+        
+        <div>
+          <label class="topic" for="lastName">Industries: </label>
+            <div class="container">
+                <div class="dropdown">
+                  
+                  <button for="items" onclick="toggleDropdown()" class="dropbtn">Select Industry Type</button>
+              
+                  <div id="dropdown-content" class="dropdown-content">
+                    <label for="option1"><input id="Industries-option1" class="checkbox" type="checkbox" value="Automotive"> Automotive</label><br>
+                    <label for="option2"><input id="Industries-option2" class="checkbox" type="checkbox" value="Pharma"> Pharma</label><br>
+                    <label for="option3"><input id="Industries-option3" class="checkbox" type="checkbox" value="MMC"> MMC</label><br>
+                    <label for="option4"><input id="Industries-option4" class="checkbox" type="checkbox" value="CPG"> CPG</label><br>
+                    <label for="option5"><input id="Industries-option5" class="checkbox" type="checkbox" value="Metal"> Metal</label><br>
+                    <label for="option6"><input id="Industries-option6" class="checkbox" type="checkbox" value="O&G"> O&G</label><br>
+                    <label for="option7"><input id="Industries-option7" class="checkbox" type="checkbox" value="E-Commerce"> E-Commerce</label><br>
+                    <label for="option8"><input id="Industries-option8" class="checkbox" type="checkbox" value="EPC"> EPC</label><br>
+                    <label for="opyion9"><input id="Industries-option9" class="checkbox" type="checkbox" value="Paper"> Paper</label><br>
+                    <label for="option10"><input id="Industries-option10" class="checkbox" type="checkbox" value="Chemical"> Chemical</label><br>
+                  </div>
+                  
+                </div>
+              </div>
+              <label for="lastName">Use Cases</label>
+              <div class="container">
+                
+                <div class="dropdown">
+                  
+                  <button onclick="toggleDropdown2()" class="dropbtn">Select Use Case Showed</button>
+              
+                  <div id="dropdown-content2" class="dropdown-content2">
+                    <label><input id="UseCases-option1" class="checkbox" type="checkbox" value="Asset Performance Management"> Asset Performance Management</label><br>
+                    <label><input id="UseCases-option2" class="checkbox" type="checkbox" value="Asset Line Visibility"> Asset Line Visibility</label><br>
+                    <label><input id="UseCases-option3" class="checkbox" type="checkbox" value="Augmented Remote Assistance"> Augmented Remote Assistance</label><br>
+                    <label><input id="UseCases-option4" class="checkbox" type="checkbox" value="Secured Remote Assistance"> Secured Remote Assistance</label><br>
+                    <label><input id="UseCases-option5" class="checkbox" type="checkbox" value="Energy Management"> Energy Management</label><br>
+                    <label><input id="UseCases-option6" class="checkbox" type="checkbox" value="Virtual Commissioning"> Virtual Commissioning</label><br>
+                    <label><input id="UseCases-option7" class="checkbox" type="checkbox" value="Batch Performance Analytics"> Batch Performance Analytics</label><br>
+                    <label><input id="UseCases-option8" class="checkbox" type="checkbox" value="Connected Work Cell"> Connected Work Cell</label><br>
+                    <label><input id="UseCases-option9" class="checkbox" type="checkbox" value="Yield Optimization"> Yield Optimization</label><br>
+                    <label><input id="UseCases-option10" class="checkbox" type="checkbox" value="Cyber Threat Detection & Mitigation"> Cyber Threat Detection & Mitigation</label><br>
+                    <label><input id="UseCases-option11" class="checkbox" type="checkbox" value="Digital Shift Handover"> Digital Shift Handover</label><br>
+                    <label><input id="UseCases-option12" class="checkbox" type="checkbox" value="Digital Work Instruction/ Knowledge Transfer"> Digital Work Instruction/ Knowledge Transfer</label><br>
+                    <label><input id="UseCases-option13" class="checkbox" type="checkbox" value="Digital Work Order Management"> Digital Work Order Management</label><br>
+                    <label><input id="UseCases-option14" class="checkbox" type="checkbox" value="Automatic Changeover"> Automatic Changeover</label><br>
+                    <label><input id="UseCases-option15" class="checkbox" type="checkbox" value="Digital Engineering"> Digital Engineering</label><br>
+                    <label><input id="UseCases-option16" class="checkbox" type="checkbox" value="Plantwide Control/ Industry Dashboard"> Plantwide Control/ Industry Dashboard</label><br>
+                    
+                  </div>
+                </div>
+              </div>
+              
+              <label for="lastName">Demoes: </label>
+              <div class="container">
+                
+                <div class="dropdown">
+                  
+                  <button onclick="toggleDropdown3()" class="dropbtn">Select Demoes Showed</button>
+              
+                  <div id="dropdown-content3" class="dropdown-content3">
+                    <label><input id="Demoes-option1" class="checkbox" type="checkbox" value="Smart Sensor"> Smart Sensor </label><br>
+                    <label><input id="Demoes-option2" class="checkbox" type="checkbox" value="FT Metrics">FT Metrics </label><br>
+                    <label><input id="Demoes-option3" class="checkbox" type="checkbox" value="Drive Analytics">Drive Analytics </label><br>
+                    <label><input id="Demoes-option4" class="checkbox" type="checkbox" value="CNC TW Demo">CNC TW Demo </label><br>
+                    <label><input id="Demoes-option5" class="checkbox" type="checkbox" value="Fiix">Fiix </label><br>
+                    <label><input id="Demoes-option6" class="checkbox" type="checkbox" value="Asset Center">Asset Center  </label><br>
+                    <label><input id="Demoes-option7" class="checkbox" type="checkbox" value="Condition Monitoring"> Condition Monitoring</label><br>
+                    <label><input id="Demoes-option8" class="checkbox" type="checkbox" value="Plex"> Plex</label><br>
+                    <label><input id="Demoes-option9" class="checkbox" type="checkbox" value="TW Dashboard">TW Dashboard </label><br>
+                    <label><input id="Demoes-option10" class="checkbox" type="checkbox" value="Vuforia Chalk">Vuforia Chalk </label><br>
+                    <label><input id="Demoes-option11" class="checkbox" type="checkbox" value="FTRA">FTRA  </label><br>
+                    <label><input id="Demoes-option12" class="checkbox" type="checkbox" value="Emulate 3D">Emulate 3D </label><br>
+                    <label><input id="Demoes-option13" class="checkbox" type="checkbox" value="Golden Batch"> Golden Batch</label><br>
+                    <label><input id="Demoes-option14" class="checkbox" type="checkbox" value="TW Freshtrax"> TW Freshtrax</label><br>
+                    <label><input id="Demoes-option15" class="checkbox" type="checkbox" value="APC/ MPC">APC/ MPC </label><br>
+                    <label><input id="Demoes-option16" class="checkbox" type="checkbox" value="IDC">IDC </label><br>
+                    <label><input id="Demoes-option17" class="checkbox" type="checkbox" value="Thin Manager">Thin Manager </label><br>
+                    <label><input id="Demoes-option18" class="checkbox" type="checkbox" value="Security">Security </label><br>
+                    <label><input id="Demoes-option19" class="checkbox" type="checkbox" value="Vuforia View">Vuforia View </label><br>
+                    <label><input id="Demoes-option20" class="checkbox" type="checkbox" value="Vuforia Expert Capture"> Vuforia Expert Capture</label><br>
+                    <label><input id="Demoes-option21" class="checkbox" type="checkbox" value="ICT">ICT  </label><br>
+                    <label><input id="Demoes-option22" class="checkbox" type="checkbox" value="ACM"> ACM</label><br>
+                    <label><input id="Demoes-option23" class="checkbox" type="checkbox" value="RA Motors/ RA Tire /RA Battery"> RA Motors/ RA Tire /RA Battery </label><br>
+                    <label><input id="Demoes-option24" class="checkbox" type="checkbox" value="Mighty Q"> Mighty Q</label><br>
+                    <label><input id="Demoes-option25" class="checkbox" type="checkbox" value="RA Dairy">RA Dairy </label><br>
+                    <label><input id="Demoes-option26" class="checkbox" type="checkbox" value="Freshtrax">Freshtrax </label><br>
+                    <label><input id="Demoes-option27" class="checkbox" type="checkbox" value="Minecorp">Minecorp </label><br>
+                    <label><input id="Demoes-option28" class="checkbox" type="checkbox" value="WWW">WWW </label><br>
+                    
+                  </div>
+                </div>
+              </div>
+
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" required><br><br>
+              <label for="name">Account Manager:</label>
+              <input type="text" id="name" name="name" required><br><br>
+              <label for="email">Account:</label>
+              <input type="text" id="email" name="email" required><br><br>
+              <label for="age">Location:</label>
+              <input type="text" id="age" name="age" required><br><br>
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" required><br><br>
+              
+        
+           
+        <button type="button" onclick="generatePDF()" class="pdf">Generate PDF</button>
+       
+    </form>
+  </div>
+    <!-- Script to generate PDF -->
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
+    
+   <script>
+    async function generatePDF() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const age = document.getElementById('age').value;
+            const date = document.getElementById('date').value;
+            const title = document.getElementById('title').value;
+            const Industries = 'Industries:';
+          const UseCases = 'UseCases:';
+          const Demoes = 'Demoes:';
+            
+            
+           
+            
+            // Create a new PDF document
+            const pdfDoc = await PDFLib.PDFDocument.create();
+            const page = pdfDoc.addPage();
+
+            // Add form data to the PDF
+            page.drawText(`${title}`, {
+                x: 50,
+                y: 750,
+                size: 20,
+            });
+            page.drawText(`Account Manager:  ${name}`, {
+                x: 50,
+                y: 700,
+                size: 12,
+            });
+            page.drawText(`Account:  ${email}`, {
+                x: 50,
+                y: 680,
+                size: 12,
+            });
+            page.drawText(`Location:  ${age}`, {
+                x: 50,
+                y: 660,
+                size: 12,
+            });
+            page.drawText(`Date:  ${date}`, {
+                x: 50,
+                y: 640,
+                size: 12,
+            });
+           
+            let y =600;
+          
+          page.drawText(Industries,{
+            x:50,
+            y:y,
+            size: 16,
+          });
+
+          y -= 20;
+
+         document.querySelectorAll('input[id^="Industries-"]:checked').forEach(checkbox => {
+          page.drawText(checkbox.value,{
+            x: 100,
+            y: y,
+            size: 12,
+
+          });
+          y -=20;
+     
+         });
+
+         y -= 20;
+        
+         page.drawText(UseCases,{
+          x: 50,
+          y : y,
+          size: 16,
+         });
+
+         y -= 20;
+
+         document.querySelectorAll('input[id^="UseCases-"]:checked').forEach(checkbox => {
+          page.drawText(checkbox.value,{
+            x : 100,
+            y : y,
+            size : 12
+
+          });
+          y -= 20;
+        
+         });
+
+         y -= 20;
+
+         page.drawText(Demoes,{
+          x : 50,
+          y : y,
+          size: 16,
+         });
+
+         y -= 20;
+
+         document.querySelectorAll('input[id^="Demoes-"]:checked').forEach(checkbox => {
+          page.drawText(checkbox.value,{
+            x : 100,
+            y : y,
+            size : 12,
+
+          });
+
+          y -= 20;
+     
+         });
+            
+           
+           
+
+            // Save the PDF
+            const pdfBytes = await pdfDoc.save();
+            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const url = URL.createObjectURL(blob);
+
+            // Create a link to download the PDF
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'generated.pdf';
+            a.click();
+        } 
+   </script> 
+   <script>
+    function openAnotherPage() {
+        // Specify the path to the HTML file you want to open
+        var url = "index.html"; // Path to another HTML file
+        
+        // Navigate to the specified URL
+        window.location.href = url;
+    }
+   </script>   
+        
+    
+    
+</body>
+</html>
