@@ -355,7 +355,7 @@ form {
     position: absolute;
     background-color: #f9f9f9;
     min-width: 40vw;
-    max-height: 60vh; /* Set a max height for the dropdown content */
+    max-height: 400px; /* Set a max height for the dropdown content */
     overflow-y: auto; /* Enable vertical scrollbar */
     border: 1px solid #ddd;
     font-size: 13px;
