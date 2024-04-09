@@ -81,56 +81,7 @@ label {
     font-size: 14px;
 }
 
-/* Styles for Progress Bar */
-.progressbar {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    counter-reset: step;
-    margin: 2rem 0 4rem;
-}
-.progressbar::before, .progress {
-    content: "";
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 4px;
-    width: 100%;
-    background-color: #dcdcdc;
-    z-index: -1;
-}
-.progress {
-    background-color: var(--primary-color);
-    width: 0%;
-    transition: 0.3s;
-    z-index: -1;
-}
 
-.progress-step {
-    width: 2.1875rem;
-    height: 2.1875rem;
-    background-color: #dcdcdc;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.progress-step::before {
-    counter-increment: step;
-    content: counter(step);
-}
-.progress-step::after {
-    content: attr(data-title);
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    font-size: 0.85rem;
-    color: #666;
-}
-.progress-step-active {
-    background-color: var(--primary-color);
-    color: #f3f3f3;
-}
 
 /* Styles for Form. */
 .form {
@@ -166,73 +117,7 @@ label {
     display: block;
 }
 
-/* Styles for Next and Back Button. */
-.btns-group {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
 
-.btn{
-    padding:  0.75rem;
-    display: block;
-    text-decoration: none;
-    background-color: var(--primary-color);
-    color: white;
-    text-align: center;
-    cursor: pointer;
-    border-radius: 0.25rem;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--primary-color);
-}
-
-
-/* Social Credit Styles */
-.social_media_div{
-    position: fixed;
-    left: 0;
-    bottom: 20px;
-}
-.social_media_div li{
-    list-style: none;
-    margin-bottom: 20px;
-    background-color: #fff;
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -ms-transition: all 0.4s;
-    transition: all 0.4s;
-    font-size: 20px;
-}
-.social_media_div li a {
-    text-decoration: none;
-}
-.social_media_div li a i {
-    color: black;
-    width: 2.1875rem;
-    height: 2.1875rem;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.12);
-}
-  
-.social_media_div li:hover{
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -ms--transform: rotate(360deg);
-    transform: rotate(360deg);
-    -webkit-transition: all 0.4s;
-    -moz-transition: all 0.4s;
-    -o-transition: all 0.4s;
-    -ms-transition: all 0.4s;
-    transition: all 0.4s;
-}
 
 /* Responsive Style */
 @media (max-width: 850px) {
@@ -241,327 +126,7 @@ label {
     }
 }
 
-.select-btn{
-    display: flex;
-    height: 50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #fff;
-    border-color: #0c0b0b;
-    box-shadow: 5px 10px 10px rgba(0.1, 0, 0, 0.1);
-}
-.select-btn .btn-text{
-    font-size: 17px;
-    font-weight: 400;
-    color: #333;
-}
-.select-btn .arrow-dwn{
-    display: flex;
-    height: 21px;
-    width: 21px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 50%;
-    background: #F58025;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    border-color: #0c0b0b;
-}
-.select-btn.open .arrow-dwn{
-    transform: rotate(-180deg);
-}
 
-
-.list-items{
-    position: relative;
-    margin-top: 15px;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-.select-btn.open ~ .list-items{
-    display: block;
-}
-
-.list-items .item{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    height: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    padding: 0 15px;
-    border-radius: 8px;
-}
-
-.list-items .item:hover{
-    background-color: #e7edfe;
-}
-.item .item-text{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-.item .checkbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 16px;
-    width: 16px;
-    border-radius: 4px;
-    margin-right: 12px;
-    border: 1.5px solid #c0c0c0;
-    transition: all 0.3s ease-in-out;
-}
-.item.checked .checkbox{
-    background-color: #F58025;
-    border-color: #F58025;
-}
-.list-items .item:hover{
-    background-color: #e7edfe;
-}
-.item .item-text{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-
-.checkbox .check-icon{
-    color: #fff;
-    font-size: 11px;
-    transform: scale(0);
-    transition: all 0.2s ease-in-out;
-}
-.item.checked .check-icon{
-    transform: scale(1);
-}
-
-.success{
-    border: 1px solid green;
-    color: green;
-    border-radius: 15px;
-    padding: .5rem 1rem;
-    background-color: rgb(158, 253, 158);
-    display: none;
-}
-
-.error{
-    border: 1px solid red;
-    color: red;
-    border-radius: 15px;
-    padding: .5rem 1rem;
-    background-color: rgb(248, 188, 188);
-    display: none;
-}
-
-
-.select-btn3{
-    display: flex;
-    height: 50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #fff;
-    border-color: #0c0b0b;
-    box-shadow: 5px 10px 10px rgba(0.1, 0, 0, 0.1);
-}
-.select-btn3 .btn-text3{
-    font-size: 17px;
-    font-weight: 400;
-    color: #333;
-}
-.select-btn3 .arrow-dwn3{
-    display: flex;
-    height: 21px;
-    width: 21px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 50%;
-    background: #F58025;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    border-color: #0c0b0b;
-}
-.select-btn3.open .arrow-dwn3{
-    transform: rotate(-180deg);
-}
-
-
-.list-items3{
-    position: relative;
-    margin-top: 15px;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-.select-btn3.open ~ .list-items3{
-    display: block;
-}
-
-.list-items3 .item3{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    height: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    padding: 0 15px;
-    border-radius: 8px;
-}
-
-.list-items3 .item3:hover{
-    background-color: #e7edfe;
-}
-.item3 .item-text3{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-.item3 .checkbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 16px;
-    width: 16px;
-    border-radius: 4px;
-    margin-right: 12px;
-    border: 1.5px solid #c0c0c0;
-    transition: all 0.3s ease-in-out;
-}
-.item3.checked .checkbox{
-    background-color: #F58025;
-    border-color: #F58025;
-}
-.list-items3 .item3:hover{
-    background-color: #e7edfe;
-}
-.item3 .item-text3{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-
-.checkbox .check-icon{
-    color: #fff;
-    font-size: 11px;
-    transform: scale(0);
-    transition: all 0.2s ease-in-out;
-}
-.item3.checked .check-icon{
-    transform: scale(1);
-}
-
-.select-btn1{
-    display: flex;
-    height: 50px;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    background-color: #fff;
-    border-color: #0c0b0b;
-    box-shadow: 5px 10px 10px rgba(0.1, 0, 0, 0.1);
-}
-.select-btn1 .btn-text1{
-    font-size: 17px;
-    font-weight: 400;
-    color: #333;
-}
-.select-btn1 .arrow-dwn1{
-    display: flex;
-    height: 21px;
-    width: 21px;
-    color: #fff;
-    font-size: 14px;
-    border-radius: 50%;
-    background: #F58025;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    border-color: #0c0b0b;
-}
-.select-btn1.open .arrow-dwn1{
-    transform: rotate(-180deg);
-}
-
-
-.list-items1{
-    position: relative;
-    margin-top: 15px;
-    border-radius: 8px;
-    padding: 16px;
-    background-color: #fff;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    display: none;
-}
-.select-btn1.open ~ .list-items1{
-    display: block;
-}
-
-.list-items1 .item1{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    height: 50px;
-    cursor: pointer;
-    transition: 0.3s;
-    padding: 0 15px;
-    border-radius: 8px;
-}
-
-.list-items1 .item1:hover{
-    background-color: #e7edfe;
-}
-.item1 .item-text1{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-.item1 .checkbox{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 16px;
-    width: 16px;
-    border-radius: 4px;
-    margin-right: 12px;
-    border: 1.5px solid #c0c0c0;
-    transition: all 0.3s ease-in-out;
-}
-.item1.checked .checkbox{
-    background-color: #F58025;
-    border-color: #F58025;
-}
-.list-items1 .item1:hover{
-    background-color: #e7edfe;
-}
-.item1 .item-text1{
-    font-size: 16px;
-    font-weight: 400;
-    color: #333;
-}
-
-.checkbox .check-icon{
-    color: #fff;
-    font-size: 11px;
-    transform: scale(0);
-    transition: all 0.2s ease-in-out;
-}
-.item1.checked .check-icon{
-    transform: scale(1);
-}
 
 
 :root {
@@ -680,7 +245,7 @@ form {
     margin: 1rem;
     padding-bottom: 1rem;
   }
-  
+ /* 
   .dropbtn {
     background-color:#CD163F;
     color: white;
@@ -695,6 +260,7 @@ form {
   }
   
   /* Style the dropdown content (hidden by default) */
+  /*
   .dropdown-content {
     display: none;
     padding: 1rem;
@@ -738,12 +304,14 @@ form {
   }
   
   /* Show the dropdown content when the dropdown button is clicked */
+  /*
   .show {
     display: block;
   }
   .checkbox{
     margin-right: 1.5rem;
   }
+  */
 .dictionary{
     margin-top: 3px;
     background-color: rgb(250, 182, 105);
@@ -763,4 +331,52 @@ form {
     background-color: #CD163F;
     color: white;
     cursor: pointer;
+}
+.dropbtn {
+    background-color: #CD163F;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+}
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #CD163F;
+    cursor: pointer;
+   
+}
+.dropdown {
+
+    margin-right: 20px; /* Adjust spacing between dropdowns */
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 40vw;
+    max-height: 100vh; /* Set a max height for the dropdown content */
+    overflow-y: auto; /* Enable vertical scrollbar */
+    border: 1px solid #ddd;
+    font-size: 13px;
+}
+.dropdown-content label {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display:inline-flex;
+}
+.checkbox{
+    width: 10px;
+    height: 10px;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content label:hover {
+    background-color: #f1f1f1;
+}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the button is clicked) */
+.show {
+    display: block;
 }
