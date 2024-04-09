@@ -135,6 +135,12 @@
         <input type="text" id="age" name="age" required><br><br>
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required><br><br>
+
+        <div id="class-container">
+          <!-- Class input fields will be added here -->
+      </div>
+
+      <button type="button" onclick="addClassInput()" class="pdf">ADD Additional Details</button><br><br>
       
 
 
@@ -147,6 +153,40 @@
   <script src="index.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.16.0/pdf-lib.min.js"></script>
   <script>
+
+function addClassInput() {
+            const classContainer = document.getElementById('class-container');
+
+            // Create a new div to hold each class input
+            const classDiv = document.createElement('div');
+            classDiv.classList.add('class-input'); // Apply optional styling class
+
+            // Create input field for class name
+            const classNameLabel = document.createElement('label');
+            classNameLabel.textContent = 'Visitor Name:';
+            const classNameInput = document.createElement('input');
+            classNameInput.type = 'text';
+            classNameInput.name = 'class_name'; // Set name attribute for form submission
+            classNameLabel.appendChild(classNameInput);
+
+            // Create input field for class code
+            const classCodeLabel = document.createElement('label');
+            classCodeLabel.textContent = 'Designation:';
+            const classCodeInput = document.createElement('input');
+            classCodeInput.type = 'text';
+            classCodeInput.name = 'class_code'; // Set name attribute for form submission
+            classCodeLabel.appendChild(classCodeInput);
+
+            // Append input fields to the class container div
+            classDiv.appendChild(classNameLabel);
+            classDiv.appendChild(document.createElement('br')); // Line break
+            classDiv.appendChild(classCodeLabel);
+            classDiv.appendChild(document.createElement('br')); // Line break
+
+            // Append the class container div to the main container
+            classContainer.appendChild(classDiv);
+        }
+
     // Using vanilla JavaScript
     document.querySelectorAll('.dropbtn').forEach(function (btn) {
       btn.addEventListener('click', function () {
@@ -173,6 +213,15 @@
       const Industries = 'Industries:';
       const UseCases = 'UseCases:';
       const Demoes = 'Demoes:';
+      const classes = [];
+
+            // Collect class input data
+            const classInputs = document.querySelectorAll('.class-input');
+            classInputs.forEach(inputDiv => {
+                const className = inputDiv.querySelector('input[name="class_name"]').value;
+                const classCode = inputDiv.querySelector('input[name="class_code"]').value;
+                classes.push({ className, classCode });
+            });
 
 
 
@@ -271,6 +320,17 @@
         y -= 20;
 
       });
+      y -= 20;
+      classes.forEach((course, index) => {
+                
+                page.drawText(`Visitor and its Designation: ${index + 1}: ${course.className} - ${course.classCode}`, {
+                    x: 50,
+                    y: y,
+                    size: 12
+                });
+                y -= 20;
+            });
+            y -= 20;
 
 
 
