@@ -275,27 +275,28 @@
         page.drawText('Demos:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedDemos.forEach(({ value, paragraph , paragraph1, paragraph2,paragraph3,paragraph4,paragraph6,paragraph5, paragraph7, paragraph8}) => {
-            if (yPosition < 100) addNewPage(); // Check if content exceeds page height
-            page.drawText(value, { x: 80, y: yPosition, size: 12 });
-            yPosition -= 20;
-            page.drawText(paragraph, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph1, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph2, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph3, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph4, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph6, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph5, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph7, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
-            page.drawText(paragraph8, { x: 100, y: yPosition, size: 10 });
-            yPosition -= 20;
+            if (yPosition < 50) addNewPage(); // Check if content exceeds page height
+                 page.drawText(value, { x: 80, y: yPosition, size: 12 });
+                 yPosition -= 20;
+                 if (yPosition <50) addNewPage();
+                 page.drawText(paragraph, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph1, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph2, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph3, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph4, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph6, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph5, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                 page.drawText(paragraph7, { x: 100, y: yPosition, size: 10 });
+                 yPosition -= 20;
+                page.drawText(paragraph8, { x: 100, y: yPosition, size: 10 });
+                yPosition -= 20;
         });
     
         // Add classes details
@@ -402,10 +403,10 @@ classes.forEach(({ className, classCode }, index) => {
           case 'Fiix':
           paragraph = 'Fiix is a cloud-based computerized maintenance management system (CMMS). Fiix '
           paragraph1='provides comprehensive maintenance management capabilities to help organizations optimize'
-          paragraph3=' asset performance, reduce downtime, and improve operational efficiency. Its user-friendly '
-          paragraph4='interface, mobile accessibility, and integration capabilities make it a valuable tool for '
-          paragraph6='maintenance professionals seeking to streamline their maintenance drive continuous improvement.';
-          paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
+          paragraph2=' asset performance, reduce downtime, and improve operational efficiency. Its user-friendly '
+          paragraph3='interface, mobile accessibility, and integration capabilities make it a valuable tool for '
+          paragraph4='maintenance professionals seeking to streamline their maintenance drive continuous improvement.';
+          paragraph6='',paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
           break;
           case 'Asset Center':
           paragraph = 'FactoryTalk Asset Center is an asset management software solution designed to help'
@@ -491,8 +492,8 @@ classes.forEach(({ className, classCode }, index) => {
           paragraph2='facilities to distribution centers and retail stores. ThingWorx FreshTrax helps the '
           paragraph3='respective companies ensure the quality, safety, and freshness of perishable goods '
           paragraph4='throughout the supply chain, while optimizing operations, reducing costs, and complying '
-          paragraph5='with regulatory requirements.';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
+          paragraph6='with regulatory requirements.';
+          paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
           break;
           case 'APC/MPC':
           paragraph = 'Advanced Process Control (APC) refers to a set of sophisticated control techniques and strategies '
