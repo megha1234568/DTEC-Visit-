@@ -246,57 +246,55 @@
         page.drawText(`Date: ${date}`, { x: 50, y: yPosition, size: 12 });
     
         // Add selected Industries with paragraphs
-        yPosition -= 50;
+        yPosition -= 20;
         page.drawText('Industries:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedIndustries.forEach(({ value, paragraph }) => {
             if (yPosition < 50) addNewPage(); // Check if content exceeds page height
             page.drawText(value, { x: 100, y: yPosition, size: 12 });
             yPosition -= 20;
-            page.drawText(paragraph, { x: 120, y: yPosition, size: 10 });
-            yPosition -= 20;
+            
         });
     
         // Add selected Use Cases with paragraphs
-        yPosition -= 50;
+        yPosition -= 20;
         page.drawText('Use Cases:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedUseCases.forEach(({ value, paragraph }) => {
             if (yPosition < 50) addNewPage(); // Check if content exceeds page height
             page.drawText(value, { x: 100, y: yPosition, size: 12 });
             yPosition -= 20;
-            page.drawText(paragraph, { x: 120, y: yPosition, size: 10 });
-            yPosition -= 20;
+           
         });
     
         // Add selected Demos with paragraphs
         
-        yPosition -= 30;
+        yPosition -= 20;
         page.drawText('Demos:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedDemos.forEach(({ value, paragraph , paragraph1, paragraph2,paragraph3,paragraph4,paragraph6,paragraph5, paragraph7, paragraph8}) => {
             if (yPosition < 50) addNewPage(); // Check if content exceeds page height
                  page.drawText(value, { x: 80, y: yPosition, size: 12 });
                  yPosition -= 20;
-                 if (yPosition <50) addNewPage();
+                 if (yPosition <30) addNewPage();
                  page.drawText(paragraph, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph1, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph2, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph3, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph4, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph6, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph5, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                  page.drawText(paragraph7, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 20;
+                 yPosition -= 10;
                 page.drawText(paragraph8, { x: 100, y: yPosition, size: 10 });
-                yPosition -= 20;
+                yPosition -= 10;
         });
     
         // Add classes details
