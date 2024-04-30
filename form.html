@@ -106,7 +106,7 @@
               <label><input id="Demos-option13" class="checkbox" type="checkbox" value="Golden Batch">Golden Batch  </label><br>
               <label><input id="Demos-option14" class="checkbox" type="checkbox" value="TW Freshtrax">TW Freshtrax</label><br>
               <label><input id="Demos-option15" class="checkbox" type="checkbox" value="APC/MPC">APC/MPC  </label><br>
-              <label><input id="Demos-option16" class="checkbox" type="checkbox" value="IDC">IDC  </label><br>
+              <label><input id="Demos-option16" class="checkbox" type="checkbox" value="IDC">IDC </label><br>
               <label><input id="Demos-option17" class="checkbox" type="checkbox" value="Thin Manager">Thin Manager </label><br>
               <label><input id="Demos-option18" class="checkbox" type="checkbox" value="Security">Security </label><br>
               <label><input id="Demos-option19" class="checkbox" type="checkbox" value="Vuforia View">Vuforia View </label><br>
@@ -222,12 +222,12 @@
         // Add multiple pages
         let page;
         let pageNum = 1;
-        let yPosition = 750; // Initial y position on the first page
+        let yPosition = 800; // Initial y position on the first page
     
         // Helper function to add a new page
         function addNewPage() {
             page = pdfDoc.addPage();
-            yPosition = 750; // Reset y position for the new page
+            yPosition = 800; // Reset y position for the new page
             pageNum++;
         }
     
@@ -246,7 +246,7 @@
         page.drawText(`Date: ${date}`, { x: 50, y: yPosition, size: 12 });
     
         // Add selected Industries with paragraphs
-        yPosition -= 20;
+        yPosition -= 30;
         page.drawText('Industries:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedIndustries.forEach(({ value, paragraph }) => {
@@ -261,9 +261,23 @@
         page.drawText('Use Cases:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedUseCases.forEach(({ value, paragraph }) => {
-            if (yPosition < 50) addNewPage(); // Check if content exceeds page height
-            page.drawText(value, { x: 100, y: yPosition, size: 12 });
-            yPosition -= 20;
+          if (yPosition < 50) {
+              addNewPage(); // Check if content exceeds page height
+          }
+          page.drawText(value, { x: 80, y: yPosition, size: 12 });
+          yPosition -= 20;
+      
+          const lines = paragraph.split('\n'); // Split paragraph into lines
+          lines.forEach(line => {
+              if (yPosition < 50) {
+                  addNewPage(); // Check if adding a line exceeds page height
+              }
+              page.drawText(line, { x: 80, y: yPosition, size: 10 });
+              yPosition -= 12; // Adjust line spacing
+          });
+       
+      
+          yPosition -= 20; // Additional spacing between different values
            
         });
     
@@ -272,49 +286,46 @@
         yPosition -= 20;
         page.drawText('Demos:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
-        selectedDemos.forEach(({ value, paragraph , paragraph1, paragraph2,paragraph3,paragraph4,paragraph6,paragraph5, paragraph7, paragraph8}) => {
-            if (yPosition < 50) addNewPage(); // Check if content exceeds page height
-                 page.drawText(value, { x: 80, y: yPosition, size: 12 });
-                 yPosition -= 20;
-                 if (yPosition <30) addNewPage();
-                 page.drawText(paragraph, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph1, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph2, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph3, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph4, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph6, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph5, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                 page.drawText(paragraph7, { x: 100, y: yPosition, size: 10 });
-                 yPosition -= 10;
-                page.drawText(paragraph8, { x: 100, y: yPosition, size: 10 });
-                yPosition -= 10;
-        });
+        selectedDemos.forEach(({ value, paragraph }) => {
+          if (yPosition < 50) {
+              addNewPage(); // Check if content exceeds page height
+          }
+          page.drawText(value, { x: 80, y: yPosition, size: 12 });
+          yPosition -= 20;
+      
+          const lines = paragraph.split('\n'); // Split paragraph into lines
+          lines.forEach(line => {
+              if (yPosition < 50) {
+                  addNewPage(); // Check if adding a line exceeds page height
+              }
+              page.drawText(line, { x: 80, y: yPosition, size: 10 });
+              yPosition -= 12; // Adjust line spacing
+          });
+       
+      
+          yPosition -= 20; // Additional spacing between different values
+      });
+      
     
         // Add classes details
-        yPosition -= 50;
+        yPosition -= 20;
         
 let pageIndex = 0; // Initial page index
 
 // Add classes details
+page.drawText('Visitors:', { x: 50, y: yPosition, size: 16 });
 classes.forEach(({ className, classCode }, index) => {
     if (yPosition < 50) {
         // Check if content exceeds page height
         addNewPage();
-        yPosition = 750; // Reset yPosition for new page
+        yPosition = 800; // Reset yPosition for new page
         pageIndex++; // Increment page index
     }
 
     const displayIndex = index + 1; // Calculate 1-based index for display
     const yOffset = (pageIndex > 0) ? 0 : 50; // Offset yPosition for subsequent pages
 
-    page.drawText(`${displayIndex} - Visitor : ${className} - ${classCode}`, { x: 50, y: yPosition - yOffset, size: 12 });
+    page.drawText(`${displayIndex} ${className} - ${classCode}`, { x: 50, y: yPosition - yOffset, size: 12 });
     yPosition -= 20; // Adjust yPosition for the next item
 });
     
@@ -333,268 +344,467 @@ classes.forEach(({ className, classCode }, index) => {
     
     
 
-    // Helper function to retrieve selected checkboxes with paragraphs
     function getSelectedValuesWithParagraphs(category) {
       const checkboxes = document.querySelectorAll(`input[id^="${category}-"]:checked`);
       const selectedValues = [];
-
+  
       checkboxes.forEach(checkbox => {
-        const value = checkbox.value;
-        let paragraph = '';
-        let paragraph1 = '';
-        let paragraph2 = '';
-        let paragraph3 = '';
-        let paragraph4 = '';
-        let paragraph5 = '';
-        let paragraph6 = '';
-        let paragraph7 = '';
-        let paragraph8 = '';
-        let paragraph9 = '';
-        let paragraph10 = '';
-        let paragraph11= '';
+          const value = checkbox.value;
+          let paragraphs = [];
+  
+          switch (value) {
+              case 'Smart Sensor':
+                  paragraphs = [
+                  'A smart sensor is an advanced sensing device equipped with built-in intelligence and communication',
+                  'capabilities that enable it to collect, process, analyze, and transmit data autonomously or in ',
+                  'collaboration with other systems. Smart sensors go beyond traditional sensors by incorporating ',
+                  'additional functionalities such as data processing, signal conditioning, and communication protocols, ',
+                  'allowing them to provide actionable insights and support various applications in industries such as ',
+                  'manufacturing, healthcare, automotive, environmental monitoring, and smart infrastructure.'
+                  ];
+                  break;
+              case 'FT Metrics':
+                  paragraphs = [
+                  'FactoryTalk Metrics is designed to provide manufacturers with comprehensive manufacturing ',
+                  'intelligence capabilities, allowing them to collect, analyze, and visualize real-time production data ',
+                  'to improve operational efficiency, productivity, and decision-making. FactoryTalk Metrics is designed ',
+                  'to provide manufacturers with comprehensive manufacturing intelligence capabilities, allowing them to ',
+                  'collect, analyze, and visualize real-time production data to improve operational efficiency, productivity, ',
+                  'and decision-making.'
+                  ];
+                  break;
+                  case 'Drive Analytics':
+                  paragraphs = [
+                  'Drive analytics refers to the process of collecting, analyzing, and interpreting data related to the ',
+                  'performance, health, and operation of motor drives used in industrial applications. Motor drives, ',
+                  'also known as variable frequency drives (VFDs) or variable speed drives (VSDs), are electronic devices',
+                  'used to control the speed, torque, and direction of electric motors by varying the frequency and ',
+                  'voltage of the electrical power supplied to the motor. Drive analytics involves monitoring various ',
+                  'parameters and performance metrics associated with motor drives to optimize their operation, ',
+                  'improve energy efficiency, prevent failures, and enhance overall system reliability.'
+                  ];
+                  break;
+                  case 'CNC TW DEmos':
+                  paragraphs = [
+                  'ThingWorx is an industrial Internet of Things (IIoT) platform developed by PTC, a global provider of ',
+                  'software solutions for product development, manufacturing, and service. ThingWorx is designed to ',
+                  'enable organizations to connect, collect, analyze, and leverage data from connected devices, sensors, ',
+                  'and equipment in industrial settings. ThingWorx provides a comprehensive and flexible platform for ',
+                  'organizations to build and deploy industrial IoT solutions, drive digital transformation, and unlock ',
+                  'new opportunities for innovation, efficiency, and competitiveness in the industrial sector'
+                  ];
+                  break;
+                  case 'Fiix':
+                  paragraphs = [
+                  'Fiix is a cloud-based computerized maintenance management system (CMMS). Fiix provides comprehensive ',
+                  'maintenance management capabilities to help organizations optimize asset performance, reduce downtime, ',
+                  'and improve operational efficiency. Its user-friendly interface, mobile accessibility, and integration ',
+                  'capabilities make it a valuable tool for maintenance professionals seeking to streamline their maintenance ',
+                  'operations and drive continuous improvement.'
+                  ];
+                  break;
+                  case 'Asset Center':
+                  paragraphs = [
+                  'FactoryTalk Asset Center is an asset management software solution designed to help organizations ',
+                  'efficiently manage their industrial assets throughout their lifecycle. It provides centralized asset ',
+                  'management capabilities, enabling users to track, monitor, maintain, and optimize assets across their ',
+                  'facilities. FT Asset Center helps organizations optimize asset performance, reduce downtime, minimize',
+                  'maintenance costs, and improve operational efficiency by providing centralized asset management capabilities,',
+                  ' maintenance management functionalities, and integration with other systems. It serves as a valuable tool ',
+                  'for asset-intensive industries seeking to maximize the value and lifespan of their industrial assets.'
+                  ];
+                  break;
+                  case 'Condition Monitoring':
+                  paragraphs = [
+                  'Condition monitoring is a proactive maintenance strategy that involves continuously monitoring the ',
+                  'health and performance of equipment, machinery, and assets to detect early signs of deterioration, defects,',
+                  ' or impending failures. By monitoring key parameters and indicators, condition monitoring aims to identify ',
+                  'potential issues before they escalate into costly breakdowns, unplanned downtime, or safety hazards. Condition ',
+                  'monitoring plays a crucial role in predictive maintenance strategies by enabling early detection of equipment ',
+                  'faults, optimizing maintenance schedules, minimizing downtime, and extending the lifespan of critical assets. ',
+                  'By implementing condition monitoring systems, organizations can improve operational reliability, reduce ',
+                  'maintenance costs, and enhance overall asset performance and availability.'
+                  ];
+                  break;
+                  case 'Plex':
+                  paragraphs = [
+                  'Plex, also known as Plex Manufacturing Cloud, is a cloud-based enterprise resource planning (ERP) software ',
+                  'solution designed specifically for manufacturing businesses. It offers a comprehensive suite of modules and ',
+                  'functionalities to support various aspects of manufacturing operations, including production planning, ',
+                  'inventory management, quality control, supply chain management, and shop floor automation. Plex provides ',
+                  'manufacturers with a comprehensive and integrated platform to streamline operations, improve visibility, ',
+                  'and drive continuous improvement across the entire manufacturing value chain. It helps manufacturers optimize ',
+                  'production processes, reduce costs, and deliver high-quality products to customers efficiently.'
+                  ];
+                  break;
+                  case 'TW Dashboard':
+                  paragraphs = [
+                  'ThingWorx is an industrial Internet of Things (IIoT) platform developed by PTC, a global provider of software ',
+                  'solutions for product development, manufacturing, and service. ThingWorx is designed to enable organizations ',
+                  'to connect, collect, analyze, and leverage data from connected devices, sensors, and equipment in industrial ',
+                  'settings. ThingWorx provides a comprehensive and flexible platform for organizations to build and deploy ',
+                  'industrial IoT solutions, drive digital transformation, and unlock new opportunities for innovation, efficiency, ',
+                  'and competitiveness in the industrial sector'
+                  ];
+                  break;
+                  case 'Vuforia Chalk':
+                  paragraphs = [
+                  'Vuforia Chalk is an augmented reality (AR) remote assistance platform developed by PTC, the same company ',
+                  'behind ThingWorx and other industrial software solutions. Vuforia Chalk enables remote collaboration between ',
+                  'field technicians, experts, and customers by combining live video streaming with AR annotations and guidance. ',
+                  'Vuforia Chalk revolutionizes remote assistance and collaboration by leveraging AR technology to provide visual ',
+                  'guidance, support, and expertise to field technicians in real-time. It improves productivity, reduces downtime, ',
+                  'and enhances customer satisfaction by enabling faster problem resolution and more effective communication ',
+                  'between remote teams.'
+                  ];
+                  break;
+                  case 'FTRA':
+                  paragraphs = [
+                  'FactoryTalk Remote Access is a software solution developed by Rockwell Automation that enables secure remote ',
+                  'access to industrial automation systems, machinery, and equipment from remote locations. It provides ',
+                  'authorized users with the ability to monitor, troubleshoot, and maintain manufacturing assets remotely, ',
+                  'improving operational efficiency and reducing downtime. FactoryTalk Remote Access is a software solution ',
+                  'developed by Rockwell Automation that enables secure remote access to industrial automation systems, ',
+                  'machinery, and equipment from remote locations. It provides authorized users with the ability to monitor, ',
+                  'troubleshoot,and maintain manufacturing assets remotely, improving operational efficiency and reducing downtime. '
+                  ];
+                  break;
+                  case 'Emulate 3D':
+                  paragraphs = [
+                  'Emulate3D is a software platform developed by Rockwell Automation that provides simulation and emulation ',
+                  'solutions for industrial automation and material handling systems. It allows engineers, system integrators,',
+                  ' and manufacturers to create virtual models of their production lines, warehouses, and logistics operations to ',
+                  'simulate, test, and optimize their designs before implementation. Emulate3D provides a powerful simulation and ',
+                  'emulation platform for industrial automation and material handling systems, enabling users to design, simulate, ',
+                  'and optimize their operations with confidence. It helps organizations reduce project risks, improve system ',
+                  'performance, and accelerate time-to-market for new products and facilities.'
+                  ];
+                  break;
+                  case 'Golden Batch':
+                  paragraphs = [
+                  'Golden Batch, also known as "Golden Batch Analysis" or "Golden Batch Identification," is a concept used in ',
+                  'process industries, particularly in pharmaceuticals, chemicals, and food and beverage production. It refers ',
+                  'to the identification and characterization of an ideal or "golden" batch of a product that meets predefined ',
+                  'quality specifications and performance criteria. Once identified, the golden batch serves as a benchmark or ',
+                  'reference for subsequent production batches, enabling comparison, analysis, and optimization of process ',
+                  'performance. The golden batch concept is a valuable tool for ensuring product quality, consistency, and ',
+                  'compliance in process industries. By identifying and characterizing an ideal production batch, manufacturers ',
+                  'can establish a benchmark for quality, drive continuous improvement, and enhance customer satisfaction and ',
+                  'confidence in their products.'
+                  ];
+                  break;
+                  case 'TW Freshtrax':
+                  paragraphs = [
+                  'ThingWorx FreshTrax leverages IoT technology to provide real-time monitoring, tracking, and management of ',
+                  'perishable goods throughout the supply chain, from production facilities to distribution centers and retail ',
+                  'stores. ThingWorx FreshTrax helps the respective companies ensure the quality, safety, and freshness of ',
+                  'perishable goods throughout the supply chain, while optimizing operations, reducing costs, and complying ',
+                  'with regulatory requirements.'
+                  ];
+                  break;
+                  case 'APC/MPC':
+                  paragraphs = [
+                  'Advanced Process Control (APC) refers to a set of sophisticated control techniques and strategies used in ',
+                  'industrial automation to optimize the performance of complex processes and systems. APC builds upon ',
+                  'traditional control methods by incorporating advanced modeling, optimization, and automation algorithms ',
+                  'to improve process efficiency, quality, and stability. Model Predictive Control (MPC) is an advanced control ',
+                  'strategy used in industrial process control systems to optimize the performance of complex dynamic systems. ',
+                  'It uses mathematical models of the process dynamics, constraints, and objectives to predict future behavior ',
+                  'and determine optimal control actions over a finite time horizon. Model Predictive Control is a powerful and ',
+                  'versatile control strategy that enables the optimization of complex industrial processes by predicting future ',
+                  'behavior, solving optimization problems, and determining optimal control actions in real-time. MPC offers ',
+                  'advantages such as improved process performance, increased efficiency, and enhanced robustness in diverse ',
+                  'industrial applications.'
+                  ];
+                  break;
+                  case 'IDC':
+                  paragraphs = [
+                  'An industrial data center, also known as a data center for industrial applications, is a facility designed ',
+                  'to securely store, process, and manage data generated by industrial systems, equipment, and processes. ',
+                  'Industrial data centers play a critical role in modern manufacturing, energy, and infrastructure industries ',
+                  'by providing the computational infrastructure and resources needed to support data-intensive applications, ',
+                  'real-time analytics, and digital transformation initiatives. Industrial data centers are critical infrastructure ',
+                  'components that enable organizations to harness the power of data analytics, AI, and digital technologies to ',
+                  'drive innovation, improve operational efficiency, and achieve competitive advantage in industrial sectors such ',
+                  'as manufacturing, energy, utilities, transportation, and smart cities.'
+                  ];
+                  break;
+                  case 'Thin Manager':
+                  paragraphs = [
+                  'ThinManager is a software platform developed by Rockwell Automation that specializes in centralized management',
+                  'and deployment of industrial applications in manufacturing environments. It provides features for thin client ',
+                  'management, session management, and mobility solutions, enabling efficient and secure access to industrial ',
+                  'applications and resources across the plant floor. ThinManager provides a comprehensive solution for centralized ',
+                  'management, deployment, and access control of industrial applications and resources, enabling organizations to ',
+                  'improve operational efficiency, security, and mobility in manufacturing environments.'
+                  ];
+                  break;
+                  case 'Security':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
+                  case 'Vuforia View':
+                  paragraphs = [
+                  'Vuforia View is an augmented reality (AR) application developed by PTC, the creator of the Vuforia platform. ',
+                  'Vuforia View enables users to visualize digital content, such as 3D models, animations, instructions, and ',
+                  'IoT (Internet of Things) data, overlaid onto the physical world in real-time using AR technology. Vuforia ',
+                  'View provides a powerful augmented reality platform for visualizing digital content in real-world contexts, ',
+                  'enabling organizations to improve productivity, efficiency, and decision-making in various industries such ',
+                  'as manufacturing, field service, training, and maintenance.'
+                  ];
+                  break;
+                  case 'Vuforia Expert Capture':
+                  paragraphs = [
+                  'Vuforia Expert Capture is an augmented reality (AR) software solution developed by PTC, specifically designed ',
+                  'for industrial enterprises. It enables subject matter experts to easily create step-by-step instructions, ',
+                  'procedures, and training materials using AR technology. These instructions can then be deployed to frontline ',
+                  'workers using AR-enabled devices such as smartphones or smart glasses. Vuforia Expert Capture enables ',
+                  'organizations to leverage AR technology to create, deliver, and manage interactive instructions and procedures ',
+                  'for frontline workers, improving productivity, quality, and safety in industrial environments.'
+                  ];
+                  break;
+                  case 'ICT':
+                  paragraphs = [
+                  'Independent cart technology offers a flexible and scalable solution for automating material transport and ',
+                  'handling tasks in various industries, improving efficiency, productivity, and safety in logistics and ',
+                  'manufacturing operations.'
+                  ];
+                  break;
+                  case 'ACM':
+                  paragraphs = [
+                  'Application Code Manager (ACM) is a software tool offered by Rockwell Automation as part of their FactoryTalk ',
+                  'suite of products. It designed to help manage control system application code throughout its lifecycle, from ',
+                  'development to deployment and maintenance. Application Code Manager (ACM) is a software tool offered by ',
+                  'Rockwell Automation as part of their FactoryTalk suite of products. It designed to help manage control system ',
+                  'application code throughout its lifecycle, from development to deployment and maintenance.'
+                  ];
+                  break;
+                  case 'RA-Motors/RA-Tire/RA-Battery':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
+                  case 'Mighty Q':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
+                  case 'RA-Diary':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
+                  case 'Minecorp':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
+                  case 'WWW':
+                  paragraphs = [
+                  ''
+                  ];
+                  break;
 
-        // Assign a unique paragraph based on the checkbox value
-        switch (value) {
-          case 'Smart Sensor':
-            paragraph = 'A smart sensor is an advanced sensing device equipped with built-in '
-            paragraph1='intelligence and communication capabilities that enable it to collect,'
-            paragraph2='process, analyze, and transmit data autonomously or in collaboration'
-            paragraph3='with other systems. Smart sensors go beyond traditional sensors by , and'
-            paragraph4='incorporating additional functionalities such as data processing, signal',
-            paragraph6='conditioning communication protocols, allowing them to provide actionable ',
-            paragraph5='insights and support various applications in industries such as manufacturing,',
-            paragraph7=' healthcare, automotive, environmental monitoring, and smart infrastructure.';
-            paragraph8="", paragraph9='',paragraph10='',paragraph11=''
-            break;
-          case 'FT Metrics':
-            paragraph = 'FactoryTalk Metrics is designed to provide manufacturers with comprehensive'
-            paragraph1=' manufacturing intelligence capabilities, allowing them to collect, analyze, and'
-            paragraph2=' visualize real-time production data to improve operational efficiency, productivity,'
-            paragraph3=' and decision-making. FactoryTalk Metrics is designed to provide manufacturers with'
-            paragraph4=' comprehensive manufacturing intelligence capabilities, allowing them to collect,'
-            paragraph6=' analyze, and visualize real-time production data to improve operational efficiency,'
-            paragraph5=' productivity, and decision-making.';
-            paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-            break;
-          // Add more cases as needed
-          case 'Drive Analytics':
-          paragraph = 'Drive analytics refers to the process of collecting, analyzing, and interpreting'
-          paragraph1=' data related to the performance, health, and operation of motor drives used in industrial'
-          paragraph2=' applications. Motor drives, also known as variable frequency drives (VFDs) or variable'
-          paragraph3=' speed drives (VSDs), are electronic devices used to control the speed, torque, and direction'
-          paragraph4=' of electric motors by varying the frequency and voltage of the electrical power supplied to'
-          paragraph6=' the motor. Drive analytics involves monitoring various parameters and performance metrics'
-          paragraph5=' associated with motor drives to optimize their operation, improve energy efficiency, prevent'
-          paragraph7=' failures, and enhance overall system reliability.';
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'CNC TW DEmos':
-          paragraph = 'ThingWorx is an industrial Internet of Things (IIoT) platform developed by PTC,'
-          paragraph1=' a global provider of software solutions for product development, manufacturing, and service.'
-          paragraph2='ThingWorx is designed to enable organizations to connect, collect, analyze, and leverage data '
-          paragraph3='from connected devices, sensors, and equipment in industrial settings. ThingWorx provides a '
-          paragraph4='comprehensive and flexible platform for organizations to build and deploy industrial IoT'
-          paragraph6=' solutions, drive digital transformation, and unlock new opportunities for innovation, efficiency,'
-          paragraph5=' and competitiveness in the industrial sector';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Fiix':
-          paragraph = 'Fiix is a cloud-based computerized maintenance management system (CMMS). Fiix '
-          paragraph1='provides comprehensive maintenance management capabilities to help organizations optimize'
-          paragraph2=' asset performance, reduce downtime, and improve operational efficiency. Its user-friendly '
-          paragraph3='interface, mobile accessibility, and integration capabilities make it a valuable tool for '
-          paragraph4='maintenance professionals seeking to streamline their maintenance drive continuous improvement.';
-          paragraph6='',paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Asset Center':
-          paragraph = 'FactoryTalk Asset Center is an asset management software solution designed to help'
-          paragraph1=' organizations efficiently manage their industrial assets throughout their lifecycle. It provides'
-          paragraph2=' centralized asset management capabilities, enabling users to track, monitor, maintain, and'
-          paragraph3=' optimize assets across their facilities. FT Asset Center helps organizations optimize asset '
-          paragraph4='performance, reduce downtime, minimize maintenance costs, and improve operational efficiency by '
-          paragraph6='providing centralized asset management capabilities, maintenance management functionalities, and '
-          paragraph5='integration with other systems. It serves as a valuable tool for asset-intensive industries seeking '
-          paragraph7='to maximize the value and lifespan of their industrial assets.';
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Condition Monitoring':
-          paragraph ='Condition monitoring is a proactive maintenance strategy that involves continuously monitoring the '
-          paragraph1='health and performance of equipment, machinery, and assets to detect early signs of deterioration, '
-          paragraph2='defects, or impending failures. By monitoring key parameters and indicators, condition monitoring  '
-          paragraph3='aims to identify potential issues before they escalate into costly breakdowns, unplanned downtime, '
-          paragraph4='or safety hazards. Condition monitoring plays a crucial role in predictive maintenance strategies by '
-          paragraph6='enabling early detection of equipment faults, optimizing maintenance schedules, minimizing downtime,'
-          paragraph5='and extending the lifespan of critical assets. By implementing condition monitoring systems, '
-          paragraph7='organizations can improve operational reliability,reduce maintenance costs.'
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Plex':
-          paragraph = 'Plex, also known as Plex Manufacturing Cloud, is a cloud-based enterprise resource'
-          paragraph1='planning (ERP) software solution designed specifically for manufacturing businesses. It offers '
-          paragraph2='a comprehensive suite of modules and functionalities to support various aspects of manufacturing '
-          paragraph3='operations, including production planning, inventory management, quality control, supply chain '
-          paragraph4='management, and shop floor automation. Plex provides manufacturers with a comprehensive and '
-          paragraph6='integrated platform to streamline operations, improve visibility, and drive continuous improvement '
-          paragraph5='across the entire manufacturing value chain. It helps manufacturers optimize production processes,'
-          paragraph7=' reduce costs, and deliver high-quality products to customers efficiently.';
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'TW Dashboard':
-          paragraph = 'ThingWorx is an industrial Internet of Things (IIoT) platform developed by PTC, '
-          paragraph1='a global provider of software solutions for product development, manufacturing, and service. '
-          paragraph2='ThingWorx is designed to enable organizations to connect, collect, analyze, and leverage data '
-          paragraph3='from connected devices, sensors, and equipment in industrial settings. ThingWorx provides a '
-          paragraph4='comprehensive and flexible platform for organizations to build and deploy industrial IoT '
-          paragraph6='solutions, drive digital transformation, and unlock new opportunities for innovation, '
-          paragraph5='efficiency, and competitiveness in the industrial sector';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Vuforia Chalk':
-          paragraph = 'Vuforia Chalk is an augmented reality (AR) remote assistance platform developed '
-          paragraph1='by PTC, the same company behind ThingWorx and other industrial software solutions. Vuforia '
-          paragraph2='Chalk enables remote collaboration between field technicians, experts, and customers by '
-          paragraph3='combining live video streaming with AR annotations and guidance. Vuforia Chalk revolutionizes '
-          paragraph4='remote assistance and collaboration by leveraging AR technology to provide visual guidance, '
-          paragraph6='support, and expertise to field technicians in real-time. It improves productivity, reduces '
-          paragraph5='downtime, and enhances customer satisfaction by enabling faster problem resolution and more '
-          paragraph7='effective communication between remote teams.';
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-         
-          case 'Emulate 3D':
-          paragraph = 'Emulate3D is a software platform developed by Rockwell Automation that provides '
-          paragraph1='simulation and emulation solutions for industrial automation and material handling systems. '
-          paragraph2='It allows engineers, system integrators, and manufacturers to create virtual models of their '
-          paragraph3='production lines, warehouses, and logistics operations to simulate, test, and optimize their '
-          paragraph4='designs before implementation. Emulate3D provides a powerful simulation and emulation '
-          paragraph6='platform for industrial automation and material handling systems, enabling users to design, '
-          paragraph5='simulate, and optimize their operations with confidence. It helps organizations reduce '
-          paragraph7='project risks, improve system performance, and accelerate time-to-market for new products and facilities.';
-          paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Golden Batch':
-          paragraph = 'Golden Batch, also known as "Golden Batch Analysis" or "Golden Batch Identification," is a concept '
-          paragraph1='used in process industries, particularly in pharmaceuticals, chemicals, and food and beverage production.'
-          paragraph2=' It refers to the identification and characterization of an ideal or "golden" batch of a product that meets '
-          paragraph3='predefined quality specifications and performance criteria. Once identified, the golden batch '
-          paragraph4='serves as a benchmark or reference for subsequent production batches, enabling comparison, '
-          paragraph6='analysis, and optimization of process performance. The golden batch concept is a valuable tool '
-          paragraph5='for ensuring product quality, consistency, and compliance in process industries. By identifying and '
-          paragraph7='characterizing an ideal production batch,manufacturers can establish a benchmark for quality, '
-          paragraph8=' drive continuous improvement,and enhance customer satisfaction and confidence in their products'
-          paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'TW Freshtrax':
-          paragraph = 'ThingWorx FreshTrax leverages IoT technology to provide real-time monitoring, '
-          paragraph1='tracking, and management of perishable goods throughout the supply chain, from production '
-          paragraph2='facilities to distribution centers and retail stores. ThingWorx FreshTrax helps the '
-          paragraph3='respective companies ensure the quality, safety, and freshness of perishable goods '
-          paragraph4='throughout the supply chain, while optimizing operations, reducing costs, and complying '
-          paragraph6='with regulatory requirements.';
-          paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'APC/MPC':
-          paragraph = 'Advanced Process Control (APC) refers to a set of sophisticated control techniques and strategies '
-          paragraph1='used in industrial automation to optimize the performance of complex processes and systems.'
-          paragraph2='APC builds upon traditional control methods by incorporating advanced modeling, optimization,'
-          paragraph3='and automation algorithms to improve process efficiency, quality, and stability.'
-          paragraph4='Model Predictive Control (MPC) is an advanced control strategy used in industrial process '
-          paragraph6='control systems to optimize the performance of complex dynamic systems. It uses mathematical '
-          paragraph5='models of the process dynamics, constraints, and objectives to predict future behavior and '
-          paragraph7='determine optimal control actions over a finite time horizon. Model Predictive Control is a'
-          paragraph8='powerful and versatile control strategy that enables the optimization of complex industrial '
-          paragraph9='processes by predicting future behavior, solving optimization problems, and determining '
-          paragraph10='optimal control actions in real-time. MPC offers advantages such as improved process'
-          paragraph11=' performance, increased efficiency, and enhanced robustness in diverse industrial applications.'
-          break;
-          case 'IDC':
-          paragraph = 'An industrial data center, also known as a data center for industrial applications, '
-          paragraph1='is a facility designed to securely store, process, and manage data generated by industrial '
-          paragraph2='systems, equipment, and processes. Industrial data centers play a critical role in modern '
-          paragraph3='manufacturing, energy, and infrastructure industries by providing the computational infrastructure '
-          paragraph4='and resources needed to support data-intensive applications, real-time analytics, and digital '
-          paragraph6='transformation initiatives. Industrial data centers are critical infrastructure components that '
-          paragraph5='enable organizations to harness the power of data analytics, AI, and digital technologies to '
-          paragraph7='drive innovation, improve operational efficiency, and achieve competitive advantage in industrial '
-          paragraph8='sectors such as manufacturing, energy, utilities, transportation, and smart cities.';
-          paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Thin Manager':
-          paragraph = 'ThinManager is a software platform developed by Rockwell Automation that specializes '
-          paragraph1='in centralized management and deployment of industrial applications in manufacturing environments. '
-          paragraph2='It provides features for thin client management, session management, and mobility solutions, '
-          paragraph3='enabling efficient and secure access to industrial applications and resources across the plant '
-          paragraph4='floor. ThinManager provides a comprehensive solution for centralized management, deployment, '
-          paragraph6='and access control of industrial applications and resources, enabling organizations to improve '
-          paragraph5='operational efficiency, security, and mobility in manufacturing environments.';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Vuforia View':
-          paragraph = 'Vuforia View is an augmented reality (AR) application developed by PTC, the creator '
-          paragraph1='of the Vuforia platform. Vuforia View enables users to visualize digital content, such as '
-          paragraph2='3D models, animations, instructions, and IoT (Internet of Things) data, overlaid onto the '
-          paragraph3='physical world in real-time using AR technology. Vuforia View provides a powerful augmented '
-          paragraph4='reality platform for visualizing digital content in real-world contexts, enabling organizations '
-          paragraph6='to improve productivity, efficiency, and decision-making in various industries such as '
-          paragraph5='manufacturing, field service, training, and maintenance.';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'Vuforia Expert Capture':
-          paragraph = 'Vuforia Expert Capture is an augmented reality (AR) software solution developed '
-          paragraph1='by PTC, specifically designed for industrial enterprises. It enables subject matter experts to '
-          paragraph2='easily create step-by-step instructions, procedures, and training materials using AR technology. '
-          paragraph3='These instructions can then be deployed to frontline workers using AR-enabled devices such as '
-          paragraph4='smartphones or smart glasses. Vuforia Expert Capture enables organizations to leverage AR '
-          paragraph6='technology to create, deliver, and manage interactive instructions and procedures for frontline '
-          paragraph5='workers, improving productivity, quality, and safety in industrial environments.';
-          paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'ICT':
-          paragraph = 'Independent cart technology offers a flexible and scalable solution for automating '
-          paragraph1='material transport and handling tasks in various industries, improving efficiency, productivity, '
-          paragraph2='and safety in logistics and manufacturing operations.';
-          paragraph3='',paragraph4='',paragraph6='',paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'ACM':
-          paragraph = 'Application Code Manager (ACM) is a software tool offered by Rockwell Automation as '
-          paragraph1='part of their FactoryTalk suite of products.It designed to help manage control system application '
-          paragraph2='code throughout its lifecycle, from development to deployment and maintenance. Application Code '
-          paragraph3='Manager (ACM) is a software tool offered by Rockwell Automation as part of their FactoryTalk '
-          paragraph4='suite of products. It designed to help manage control system application code throughout its '
-          paragraph6='lifecycle, from development to deployment and maintenance.';
-          paragraph5='',paragraph7='',paragraph8='',paragraph9='',paragraph10='',paragraph11=''
-          break;
-          case 'RA-Motors/RA-Tire/RA-Battery':
-          paragraph=''
-          break;
-          case 'Mighty Q':
-          paragraph=''
-          break;
-          case 'RA-Diary':
-          paragraph=""
-          break;
-          case 'Minecorp':
-          paragraph=''
-          break;
-          case 'WWW':
-          paragraph=''
-          break;
-          case 'Security':
-          paragraph=''
-          break;
-          default:
-          paragraph=''
-          break;
-          
-         
-        }
+                  
+                  case 'Asset Performance Management':
+                  paragraphs = [
+                  'Asset Performance Management is a comprehensive approach to managing the lifecycle of physical assets,',
+                  'such as machinery, equipment, infrastructure, and facilities, to maximize their performance, reliability, ',
+                  'and efficiency. APM involves the integration of technologies, processes, and strategies to optimize asset ',
+                  'performance throughout their lifespan, from design and procurement to operation and maintenance. Asset ',
+                  'Performance Management aims to optimize the reliability, availability, and performance of assets while ',
+                  'minimizing risks and costs associated with maintenance and downtime. It is increasingly becoming a critical ',
+                  'strategy for asset-intensive industries such as manufacturing, energy, utilities, transportation, and ',
+                  'infrastructure..'
+                  ];
+                  break;
+                  case 'Asset Line Visibility':
+                  paragraphs = [
+                  '"Asset Line Visibility" refers to the ability to gain comprehensive insight and oversight into a specific ',
+                  'line or group of assets within an organization portfolio. It involves the capability to monitor and track ',
+                  'the performance, health, and status of assets within that particular line or group in real-time or near ',
+                  'real-time. Asset Line Visibility plays a crucial role in enabling organizations to effectively manage and ',
+                  'optimize the performance, reliability, and lifecycle of assets within specific lines or groups, leading to ',
+                  'improved operational efficiency, reduced downtime, and enhanced asset management practices.'
+                  ];
+                  break;
+                  case 'Augmented Remote Assistance':
+                  paragraphs = [
+                  'Augmented Remote Assistance (ARA) refers to the use of augmented reality (AR) and other advanced ',
+                  'technologies to provide remote support and guidance to users or technicians in performing tasks, ',
+                  'troubleshooting issues, or accessing information in real-time. It enhances traditional remote assistance ',
+                  'methods by overlaying digital information, visuals, or instructions onto the physical environment,allowing ',
+                  'for more effective communication and collaboration between remote experts and on-site personnel.Augmented ',
+                  'Remote Assistance finds applications across various industries, including manufacturing, field service, ',
+                  'healthcare, maintenance and repair, training, and customer support, where timely access to expert knowledge ',
+                  'and guidance is essential for improving efficiency, reducing downtime, and enhancing user experiences.'
+                  ];
+                  break;
+                  case 'Secured Remote AssistanceM':
+                  paragraphs = [
+                  'Secured Remote Assistance refers to the provision of remote support and guidance while ensuring the ',
+                  'confidentiality, integrity, and security of sensitive information exchanged between the remote expert ',
+                  'and the user or technician. It involves implementing robust security measures and protocols to protect ',
+                  'data, communication channels, and access to remote systems or devices from unauthorized access, interception, ',
+                  'or tampering. By implementing these security measures and best practices, organizations can ensure that their ',
+                  'remote assistance operations are conducted securely and confidently, protecting sensitive information and ',
+                  'assets while providing effective support and guidance to users and technicians remotely.'
+                  ];
+                  break;
+                  case 'Energy Management':
+                  paragraphs = [
+                  'An Energy Management System (EMS) is a comprehensive framework and set of tools designed to monitor, control, ',
+                  'and optimize the energy consumption and efficiency of buildings, facilities, or industrial processes. EMS ',
+                  'encompasses various technologies, processes, and strategies aimed at reducing energy costs, improving ',
+                  'sustainability, and minimizing environmental impact. An Energy Management System plays a crucial role in ',
+                  'helping organizations to effectively manage their energy resources, reduce costs,enhance operational efficiency,',
+                  'and achieve their sustainability objectives. It serves as a central platform for holistic energy management, ',
+                  'enabling informed decision-making and proactive action to maximize energy performance and environmental ',
+                  'impact.'
+                  ];
+                  break;
+                  case 'Virtual Commissioning':
+                  paragraphs = [
+                  'Virtual commissioning is a process used in engineering and manufacturing industries to simulate, validate, ',
+                  'and optimize the operation of automated systems, production lines, or industrial equipment in a virtual ',
+                  'environment before physical implementation. It involves creating digital replicas or models of the actual ',
+                  'systems, including machinery, robots, controllers, and associated components, and testing their ',
+                  'functionality, performance, and interaction virtually to ensure smooth operation and minimize risks during ',
+                  'the commissioning phase. Virtual commissioning serves as a valuable tool for ensuring the successful ',
+                  'deployment, optimization, and operation of automated systems and manufacturing processes, enabling ',
+                  'organizations to achieve higher productivity, reliability, and efficiency while mitigating risks and ',
+                  'uncertainties associated with traditional commissioning approaches.'
+                  ];
+                  break;
+                  case 'Batch Performance Analytics':
+                  paragraphs = [
+                  'Batch performance analytics refers to the process of analyzing the performance of batch processes ',
+                  'within manufacturing, chemical processing, pharmaceutical production, and other industries where products ',
+                  'are produced in batches rather than continuously. This type of analytics involves collecting, monitoring, ',
+                  'and analyzing data related to batch production processes to improve efficiency, quality, and productivity. ',
+                  'Batch performance analytics plays a critical role in optimizing batch production processes, enhancing product',
+                  ' quality, reducing costs, and ensuring regulatory compliance within manufacturing and process industries that ',
+                  'rely on batch manufacturing methods. By leveraging data-driven insights and advanced analytical techniques, ',
+                  'organizations can achieve greater operational excellence and competitiveness in the marketplace.'
+                  ];
+                  break;
+                  case 'Connected Work Cell':
+                  paragraphs = [
+                  'A Connected Work Cell refers to a manufacturing setup where individual machines, equipment, and processes ',
+                  'are interconnected and communicate with each other to achieve seamless coordination and optimization of ',
+                  'production activities. It involves leveraging technologies such as the Internet of Things (IoT), ',
+                  'industrial automation, and data analytics to create an integrated and intelligent manufacturing environment. ',
+                  'A connected work cell enables manufacturers to achieve greater agility, efficiency, and competitiveness by ',
+                  'creating a highly responsive and interconnected manufacturing environment that adapts to changing demands ',
+                  'and optimizes resources effectively.'
+                  ];
+                  break;
+                  case 'Yield Optimization':
+                  paragraphs = [
+                  'Yield optimization refers to the process of maximizing the output or yield of a manufacturing process, ',
+                  'production line, or operation while minimizing waste, defects, and resource consumption. It involves ',
+                  'identifying and implementing strategies to improve efficiency, quality, and productivity to achieve higher ',
+                  'yields and profitability. By focusing on these aspects and implementing appropriate strategies,organizations ',
+                  'can achieve significant improvements in yield, productivity, and profitability, resulting in a competitive ',
+                  'advantage in the marketplace.'
+                  ];
+                  break;
+                  case 'Cyber Threat Detection & Mitigation':
+                  paragraphs = [
+                  'Cyber threat detection and mitigation involve the processes and technologies used to identify, analyze, ',
+                  'and respond to cybersecurity threats and attacks targeting an organization digital assets, networks, and ',
+                  'systems. Effective detection and mitigation strategies are essential for protecting sensitive information,',
+                  'preventing data breaches, and minimizing the impact of cyber incidents. By implementing a comprehensive ',
+                  'cybersecurity strategy that incorporates these detection and mitigation practices, organizations can enhance',
+                  'their resilience to cyber threats, minimize the likelihood and impact of security breaches, and protect their ',
+                  'valuable assets and reputation.'
+                  ];
+                  break;
+                  case 'Digital Shift Handover':
+                  paragraphs = [
+                  'Digital shift handover refers to the use of digital tools and technologies to facilitate the transfer of ',
+                  'information, tasks, responsibilities, and operational insights between shifts or teams within an ',
+                  'organization. It replaces or complements traditional paper-based or manual methods of shift handover with ',
+                  'digital platforms, applications, or systems that streamline communication, enhance collaboration, and improve ',
+                  'the efficiency of shift transition processes.Digital shift handover enhances communication, collaboration, ',
+                  'and information sharing between shifts, leading to smoother transitions, improved operational efficiency, and ',
+                  'better decision-making within organizations that rely on shift-based work schedules.'
+                  ];
+                  break;
+                  case 'Digital Work Instruction/ Knowledge Transfer':
+                  paragraphs = [
+                  'Digital work instructions and knowledge transfer involve the use of digital tools and technologies to ',
+                  'document, communicate, and transfer operational procedures, best practices, and expertise within an ',
+                  'organization. These digital solutions replace traditional paper-based manuals or verbal instructions ',
+                  'with interactive, multimedia-rich content accessible via digital platforms or devices. By leveraging ',
+                  'digital work instructions and knowledge transfer solutions, organizations can streamline operations, ',
+                  'improve workforce productivity,enhance compliance with standards and regulations,and facilitate continuous',
+                  'learning and skill development among employees.'
+                  ];
+                  break;
+                  case 'Digital Work Order Management':
+                  paragraphs = [
+                  'Digital work order management involves the use of digital tools and technologies to create, assign, ',
+                  'track, and manage work orders within an organization. It replaces manual or paper-based processes ',
+                  'with digital platforms or software applications that streamline the entire work order lifecycle, from ',
+                  'creation to completion. By adopting digital work order management solutions, organizations can ',
+                  'streamline their maintenance, service, and repair operations, improve efficiency, reduce downtime, ',
+                  'enhance customer satisfaction, and optimize resource utilization.'
+                  ];
+                  break;
+                  case 'Automatic Changeover':
+                  paragraphs = [
+                  'Automatic changeover, also known as automated changeover or quick changeover, refers to the process ',
+                  'of swiftly transitioning from one production setup to another without manual intervention. This ',
+                  'process is commonly used in manufacturing environments to minimize downtime, improve efficiency, ',
+                  'and increase overall productivity by reducing the time and effort required to switch between ',
+                  'different products, batches, or configurations on production lines or equipment. By implementing ',
+                  'automatic changeover processes, manufacturers can reduce downtime, increase production flexibility, ',
+                  'respond quickly to changing market demands,and improve overall operational efficiency and competitive.'
+                  ];
+                  break;
+                  case 'Digital Engineering':
+                  paragraphs = [
+                  'Digital engineering refers to the use of digital technologies, tools, and methodologies throughout ',
+                  'the engineering lifecycle to design, simulate, validate, and optimize products, systems, or processes. ',
+                  'It encompasses a wide range of disciplines within engineering, including mechanical, electrical, civil, ',
+                  'aerospace, and software engineering, among others. Digital engineering practices offer numerous benefits, ',
+                  'including accelerated product development cycles, reduced costs and errors, improved product quality, ',
+                  'enhanced collaboration and communication, and increased innovation and competitiveness. By leveraging ',
+                  'digital technologies and methodologies, engineers can design and deliver innovative products and ',
+                  'solutions more effectively and efficiently than ever before.'
+                  ];
+                  break;
+                  case 'Plantwide Control/ Industry Dashboard':
+                  paragraphs = [
+                  'Plantwide control, also known as plant-wide process control, refers to the implementation of control ',
+                  'strategies and systems that oversee and regulate the operations of an entire industrial plant or ',
+                  'facility. This includes the coordination and optimization of various processes, equipment, and ',
+                  'subsystems within the plant to achieve desired performance objectives such as production targets, ',
+                  'quality standards, and energy efficiency. By implementing plantwide control systems and industry ',
+                  'dashboards, industrial plants can achieve greater efficiency, productivity, and reliability while ',
+                  'ensuring compliance with regulatory standards and maintaining safe and sustainable operations. ',
+                  'These systems provide operators, managers, and stakeholders with actionable insights, real-time ',
+                  'visibility,and decision support tools to optimize plant performance and achieve strategic business ',
+                  'objectives.'
+                  ];
+                  break;
+                 
+                  
 
-        selectedValues.push({ value, paragraph, paragraph1, paragraph2,paragraph3,paragraph4,paragraph6,paragraph5,paragraph7,paragraph8 });
+              // Add more cases as needed
+          }
+  
+          // Concatenate paragraphs into a single text block
+          const formattedParagraph = paragraphs.join('\n'); // Join paragraphs with newline
+  
+          selectedValues.push({ value, paragraph: formattedParagraph });
       });
-
+  
       return selectedValues;
-    }
-
+  }
+  
 
     function openAnotherPage() {
       // Specify the path to the HTML file you want to open
