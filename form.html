@@ -233,6 +233,15 @@
     
         // Add content to pages
         addNewPage(); // Start with the first page
+      // Constructing PDF filename
+    let pdfFileName;
+    if (date && title) {
+        pdfFileName = `${date}_${title}.pdf`; // Use selected date and title if both are present
+    } else if (date) {
+        pdfFileName = `${date}.pdf`; // Use only selected date
+    } else {
+        pdfFileName = 'generated.pdf'; // Fallback name if no specific date is selected
+    }
     
         // Add form data to the PDF
         page.drawText(`${title}`, { x: 150, y: yPosition, size: 20 });
@@ -329,16 +338,16 @@ classes.forEach(({ className, classCode }, index) => {
     yPosition -= 20; // Adjust yPosition for the next item
 });
     
-        // Save the PDF
-        const pdfBytes = await pdfDoc.save();
-        const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-        const url = URL.createObjectURL(blob);
-    
-        // Create a link to download the PDF
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'generated.pdf';
-        a.click();
+          // Save the PDF
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+
+    // Create a link to download the PDF
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = pdfFileName;
+    a.click();
     }
     
     
