@@ -223,12 +223,33 @@
         let page;
         let pageNum = 1;
         let yPosition = 800; // Initial y position on the first page
+        const footerMargin =100;
     
         // Helper function to add a new page
         function addNewPage() {
             page = pdfDoc.addPage();
-            yPosition = 800; // Reset y position for the new page
+            addheader(page);
+            yPosition = 900 - footerMargin; // Reset y position for the new page
             pageNum++;
+           
+        }
+        function addheader(page){
+          const footerText = 'Rockwell Automation';
+          const footerText2='Building 10-B, 5th Floor DLF Cyber City, Phase 2'
+          const footerText3='Gurugram, Haryana-12001';
+          page.drawLine({
+            start: {x:40,y:100},
+            end: {x:550,y:100},
+            thickness:1,
+          });
+          yPosition -= 20; 
+          page.drawText(footerText,{x:50,y:80,size:15, color:PDFLib.rgb(1,0,0),font:pdfDoc.embedStandardFont(PDFLib.StandardFonts.HelveticaBold)});
+          yPosition -= 20; 
+          page.drawText(footerText2,{x:50,y:60,size:9});
+          yPosition -= 20; 
+          page.drawText(footerText3,{x:50,y:40,size:9});
+           
+        
         }
     
         // Add content to pages
@@ -253,13 +274,31 @@
         page.drawText(`Location: ${age}`, { x: 50, y: yPosition, size: 12 });
         yPosition -= 20;
         page.drawText(`Date: ${date}`, { x: 50, y: yPosition, size: 12 });
+        yPosition -= 30;
+        // Add classes details
+      let pageIndex = 0; // Initial page index
+page.drawText('Visitors:', { x: 50, y: yPosition, size: 16 });
+classes.forEach(({ className, classCode }, index) => {
+    if (yPosition < footerMargin + 30) {
+        // Check if content exceeds page height
+        addNewPage();
+        yPosition = 800; // Reset yPosition for new page
+        pageIndex++; // Increment page index
+    }
+
+    const displayIndex = index + 1; // Calculate 1-based index for display
+    const yOffset = (pageIndex > 0) ? 0 : 50; // Offset yPosition for subsequent pages
+
+    page.drawText(`${displayIndex} : ${className} - ${classCode}`, { x: 80, y: yPosition - yOffset, size: 12 });
+    yPosition -= 20; // Adjust yPosition for the next item
+});
     
         // Add selected Industries with paragraphs
         yPosition -= 30;
         page.drawText('Industries:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedIndustries.forEach(({ value, paragraph }) => {
-            if (yPosition < 50) addNewPage(); // Check if content exceeds page height
+            if (yPosition < footerMargin +30) addNewPage(); // Check if content exceeds page height
             page.drawText(value, { x: 100, y: yPosition, size: 12 });
             yPosition -= 20;
             
@@ -269,8 +308,8 @@
         yPosition -= 20;
         page.drawText('Use Cases:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
-        selectedUseCases.forEach(({ value, paragraph }) => {
-          if (yPosition < 50) {
+        selectedUseCases.forEach(({value, paragraph }) => {
+          if (yPosition < footerMargin + 20) {
               addNewPage(); // Check if content exceeds page height
           }
           page.drawText(value, { x: 80, y: yPosition, size: 12 });
@@ -278,7 +317,7 @@
       
           const lines = paragraph.split('\n'); // Split paragraph into lines
           lines.forEach(line => {
-              if (yPosition < 50) {
+              if (yPosition < footerMargin + 30) {
                   addNewPage(); // Check if adding a line exceeds page height
               }
               page.drawText(line, { x: 80, y: yPosition, size: 10 });
@@ -296,7 +335,7 @@
         page.drawText('Demos:', { x: 50, y: yPosition, size: 16 });
         yPosition -= 20;
         selectedDemos.forEach(({ value, paragraph }) => {
-          if (yPosition < 50) {
+          if (yPosition < footerMargin + 30) {
               addNewPage(); // Check if content exceeds page height
           }
           page.drawText(value, { x: 80, y: yPosition, size: 12 });
@@ -304,7 +343,7 @@
       
           const lines = paragraph.split('\n'); // Split paragraph into lines
           lines.forEach(line => {
-              if (yPosition < 50) {
+              if (yPosition < footerMargin +20) {
                   addNewPage(); // Check if adding a line exceeds page height
               }
               page.drawText(line, { x: 80, y: yPosition, size: 10 });
@@ -319,24 +358,8 @@
         // Add classes details
         yPosition -= 20;
         
-let pageIndex = 0; // Initial page index
 
-// Add classes details
-page.drawText('Visitors:', { x: 50, y: yPosition, size: 16 });
-classes.forEach(({ className, classCode }, index) => {
-    if (yPosition < 50) {
-        // Check if content exceeds page height
-        addNewPage();
-        yPosition = 800; // Reset yPosition for new page
-        pageIndex++; // Increment page index
-    }
 
-    const displayIndex = index + 1; // Calculate 1-based index for display
-    const yOffset = (pageIndex > 0) ? 0 : 50; // Offset yPosition for subsequent pages
-
-    page.drawText(`${displayIndex} ${className} - ${classCode}`, { x: 50, y: yPosition - yOffset, size: 12 });
-    yPosition -= 20; // Adjust yPosition for the next item
-});
     
           // Save the PDF
     const pdfBytes = await pdfDoc.save();
@@ -550,7 +573,14 @@ classes.forEach(({ className, classCode }, index) => {
                   break;
                   case 'Security':
                   paragraphs = [
-                  ''
+                  'Unlike traditional IT systems, which focus on data processing and communication, OT systems directly impact',
+                  'physical processes (e.g., manufacturing, energy production, transportation, etc.) and are crucial for maintaining ',
+                  'operations continuity, reliability, and safety.',
+                  'OT Security Goals:',
+                  'Continuity: Ensuring uninterrupted operation of critical processes.',
+                  'Integrity: Preventing unauthorized modifications to control systems.',
+                  'Safety: Protecting personnel, equipment, and the environment.',
+                  'Confidentiality: Safeguarding sensitive information within OT networks.'
                   ];
                   break;
                   case 'Vuforia View':
